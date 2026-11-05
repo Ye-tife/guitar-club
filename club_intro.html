@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="「夏日之声」校园吉他音乐会活动详情 —— 校园吉他社 2026 年招新子页面。">
+<title>「夏日之声」校园吉他音乐会 · 活动详情 | 校园吉他社</title>
+<link rel="icon" type="image/png" href="img/icon-guitar.png">
+<link rel="preload" as="font" type="font/woff2" href="fonts/zpix.woff2" crossorigin>
+<style>
+  @font-face{
+    font-family:"Zpix";
+    src:url("fonts/zpix.woff2") format("woff2");
+    font-weight:400;font-style:normal;font-display:swap;
+  }
+  :root{
+    --bg:#0d0f14;--body:#d3d7de;--muted:#969ca8;--gold:#ffe9a8;
+    --grass:#5f9b34;--grass-l:#87c94f;--slot:#2a2e38;--line:#000;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--bg);color:#e8eaee;
+    font-family:"Zpix","Microsoft YaHei",monospace;
+    font-size:16px;line-height:1.95;-webkit-font-smoothing:none;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:url("img/tex-stone.png") repeat;background-size:96px;
+    image-rendering:pixelated;opacity:.13;
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(760px 480px at 82% -6%, rgba(240,166,60,.16), transparent 62%),
+      radial-gradient(700px 460px at 0% 40%, rgba(95,155,52,.10), transparent 60%);
+  }
+  a{color:var(--gold);text-decoration:none;}
+  img{display:block;max-width:100%;}
+  .px{image-rendering:pixelated;}
+  .wrap{width:min(920px,92vw);margin:0 auto;position:relative;z-index:2;}
+
+  /* 顶部返回栏 */
+  .backbar{
+    position:sticky;top:0;z-index:60;
+    background:rgba(10,12,16,.92);border-bottom:3px solid #000;
+    box-shadow:0 3px 0 rgba(255,255,255,.05);
+  }
+  .backbar .inner{
+    width:min(1100px,95vw);margin:0 auto;
+    display:flex;align-items:center;justify-content:space-between;gap:16px;
+    padding:9px 0;flex-wrap:wrap;
+  }
+  .back{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--slot);border:2px solid #000;
+    box-shadow:inset 2px 2px 0 #454b57, inset -2px -2px 0 #14161b;
+    color:#cfd4dc;font-size:13.5px;padding:7px 14px;transition:.15s;
+  }
+  .back:hover{background:#39404c;color:var(--gold);}
+  .backbar .brand{color:var(--gold);font-size:13px;letter-spacing:.1em;text-shadow:2px 2px 0 #000;}
+
+  /* 头部 */
+  header.intro-hero{padding:70px 0 20px;text-align:center;}
+  .kicker{
+    display:inline-block;margin:0 0 20px;padding:6px 16px;
+    background:rgba(10,12,16,.7);border:2px solid #000;
+    box-shadow:inset 2px 2px 0 rgba(255,255,255,.14), inset -2px -2px 0 rgba(0,0,0,.6);
+    color:var(--grass-l);font-size:12px;letter-spacing:.22em;
+  }
+  h1{
+    margin:0 0 16px;
+    font-size:clamp(30px,5.4vw,56px);line-height:1.3;letter-spacing:.04em;
+    color:#fff7e2;
+    text-shadow:
+      3px 0 0 #141414,-3px 0 0 #141414,0 3px 0 #141414,0 -3px 0 #141414,
+      3px 3px 0 #141414,-3px -3px 0 #141414,3px -3px 0 #141414,-3px 3px 0 #141414,
+      0 10px 0 rgba(0,0,0,.3);
+  }
+  .lead{margin:0;color:#ffe9a8;font-size:14.5px;letter-spacing:.08em;}
+
+  /* 舞台照片：画框 */
+  .stage-wrap{margin:40px auto 0;text-align:center;}
+  .painting{
+    display:inline-block;padding:12px;
+    background:url("img/tex-plank.png") repeat;background-size:72px;
+    image-rendering:pixelated;border:3px solid #000;
+    box-shadow:inset 0 0 0 2px rgba(0,0,0,.45), 0 14px 0 rgba(0,0,0,.32);
+  }
+  .painting img{image-rendering:pixelated;border:2px solid #000;width:100%;height:auto;}
+  .stage-wrap figcaption{margin:16px 0 0;font-size:12.5px;color:var(--muted);letter-spacing:.04em;}
+
+  /* 信息栏 */
+  .info-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;
+    margin:42px 0 0;
+  }
+  .info{
+    background:#191c23;border:3px solid #000;
+    box-shadow:inset 2px 2px 0 rgba(255,255,255,.08), inset -2px -2px 0 rgba(0,0,0,.6);
+    padding:16px 18px;
+  }
+  .info span{display:block;font-size:11px;letter-spacing:.2em;color:var(--muted);margin-bottom:6px;}
+  .info b{font-size:16px;color:var(--gold);font-weight:400;letter-spacing:.03em;}
+
+  /* 正文 */
+  main{padding:56px 0 0;}
+  h2{
+    margin:0 0 24px;font-size:24px;font-weight:400;color:#fdf4dd;
+    letter-spacing:.08em;text-shadow:2px 2px 0 #000;
+  }
+  .rule{
+    height:6px;margin:-8px 0 26px;
+    background:repeating-linear-gradient(90deg,#3b414b 0 8px,transparent 8px 14px);
+  }
+  .panel{
+    position:relative;background:rgba(23,26,33,.94);
+    border:3px solid #000;
+    box-shadow:inset 3px 3px 0 rgba(255,255,255,.07), inset -3px -3px 0 rgba(0,0,0,.65), 0 10px 0 rgba(0,0,0,.3);
+    padding:clamp(20px,4vw,38px);overflow:hidden;
+  }
+  .panel::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:url("img/tex-plank.png") repeat;background-size:96px;
+    image-rendering:pixelated;opacity:.05;
+  }
+  .panel > *{position:relative;z-index:1;}
+  .body-text p{margin:0 0 22px;color:var(--body);text-align:justify;text-justify:inter-ideograph;}
+  .body-text p:last-child{margin-bottom:0;}
+  .body-text p.first::first-letter{
+    font-size:1.7em;color:var(--grass-l);float:left;
+    line-height:1.3;padding:3px 8px 0 0;text-shadow:2px 2px 0 #000;
+  }
+
+  /* 节目单 */
+  .setlist{margin:34px 0 0;}
+  .setlist ol{
+    margin:0;padding:18px 26px 18px 46px;
+    background:#191c23;border:3px solid #000;
+    box-shadow:inset 3px 3px 0 rgba(255,255,255,.06), inset -3px -3px 0 rgba(0,0,0,.6);
+    color:var(--body);font-size:15px;line-height:2.3;
+  }
+  .setlist li::marker{color:var(--grass-l);}
+
+  .callout{
+    margin:42px 0 0;padding:20px 24px;
+    background:rgba(95,155,52,.1);
+    border:3px solid #000;
+    border-left:8px solid var(--grass);
+    box-shadow:inset 2px 2px 0 rgba(255,255,255,.06), inset -2px -2px 0 rgba(0,0,0,.5);
+    color:#dfe6d5;font-size:15px;
+  }
+  .callout b{color:var(--gold);}
+
+  .cta{margin:56px 0 0;text-align:center;}
+  .mcbtn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:"Zpix",monospace;font-size:16px;letter-spacing:.1em;color:#fff;
+    background:linear-gradient(180deg,#6aa93c,#4a7726);
+    border:3px solid #000;
+    box-shadow:inset 3px 3px 0 #9fd76a, inset -3px -3px 0 #2c4914, 0 6px 0 rgba(0,0,0,.5);
+    padding:13px 34px;transition:.12s;text-shadow:2px 2px 0 rgba(0,0,0,.6);
+  }
+  .mcbtn:hover{background:linear-gradient(180deg,#7cbe48,#55902b);color:#fff;}
+  .mcbtn:active{transform:translateY(3px);box-shadow:inset 3px 3px 0 #9fd76a, inset -3px -3px 0 #2c4914, 0 2px 0 rgba(0,0,0,.5);}
+
+  footer{margin-top:80px;position:relative;z-index:2;}
+  .footer-grass{
+    height:24px;background:url("img/tex-grass-side.png") repeat-x;background-size:auto 24px;
+    image-rendering:pixelated;border-top:5px solid var(--grass-l);border-bottom:3px solid #000;
+  }
+  .footer-main{background:#0b0d11;padding:32px 0 40px;color:var(--muted);font-size:13px;text-align:center;}
+  .footer-main .fbrand{display:block;color:var(--gold);font-size:15px;letter-spacing:.14em;margin-bottom:10px;text-shadow:2px 2px 0 #000;}
+
+  @media (max-width:640px){
+    header.intro-hero{padding:46px 0 14px;}
+    .body-text p{font-size:15.5px;}
+    .panel{padding:18px;}
+    .setlist ol{padding:14px 16px 14px 34px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- 顶部返回栏 -->
+<div class="backbar">
+  <div class="inner">
+    <a class="back" href="zhu-0338-work2.html">← 返回吉他社招新网页</a>
+    <span class="brand">校园吉他社 · 2026</span>
+  </div>
+</div>
+
+<header class="intro-hero">
+  <div class="wrap">
+    <p class="kicker">ACTIVITY · 活动详情</p>
+    <h1>「夏日之声」<br>校园吉他音乐会</h1>
+    <p class="lead">2026 年 5 月 16 日 · 星期六 · 19:00 · 大学生活动中心一号报告厅</p>
+
+    <figure class="stage-wrap">
+      <!-- 子页面配图：音乐会舞台 -->
+      <span class="painting">
+        <img src="img/guitar-club-stage.jpg" alt="吉他社「夏日之声」校园音乐会舞台现场" width="1024" height="576" loading="lazy">
+      </span>
+      <figcaption>彩排结束后的舞台 · 灯光试到第三遍，才调出这束光</figcaption>
+    </figure>
+
+    <div class="info-grid">
+      <div class="info"><span>DATE 时间</span><b>5 月 16 日 19:00</b></div>
+      <div class="info"><span>PLACE 地点</span><b>一号报告厅</b></div>
+      <div class="info"><span>TICKET 门票</span><b>免费 · 无需预约</b></div>
+      <div class="info"><span>HOST 主办</span><b>校园吉他社</b></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <h2>活动介绍</h2>
+    <div class="rule"></div>
+    <div class="panel">
+      <div class="body-text">
+        <p>「夏日之声」是吉他社每年五月最用力的一件事。2026 年 5 月 16 日星期六晚上七点，大学生活动中心一号报告厅会亮起灯，十二个节目，从指弹独奏到乐队合奏，从弹唱到原创首演，全部由社员自己编排。四月底开始报曲目，五月初排期彩排，每个节目至少过两遍台，灯光、返送、话筒位置都要试，谁在上台前十分钟还在后台找拨片，大家都见惯了。演出前一周，报告厅的舞台会提前搭好，社员轮流去试灯光，谁站在哪个位置、话筒离嘴多远，都要记在一个随身带的小本子上。演出当晚后台会贴一张手写的流程表，每个人上场前都去那儿看一眼自己的名字，有人用荧光笔把名字描了两遍。门票免费，不用预约，来晚了就站在后排，门口会有社员给你发一张印着手绘吉他的节目单，背面印着所有参演者的名字，有人演完还会特意回来要一张，说要寄回家。最后的返场曲目照例是全体社员合唱《送别》，唱到第二段会有很多人跑调，但那大概是整场最齐的一句。去年散场后，有人在报告厅门口坐了很久，说想再听一遍。</p>
+      </div>
+    </div>
+
+    <div class="setlist">
+      <h2>部分节目单</h2>
+      <ol>
+        <li>指弹独奏《黄昏》—— 陈屿</li>
+        <li>弹唱《平凡之路》—— 林小满</li>
+        <li>原创《把夏天留在这里》——「北门七点」乐队</li>
+        <li>合奏《天空之城》—— 吉他社合奏组</li>
+        <li>全体合唱《送别》—— 全体社员（返场）</li>
+      </ol>
+    </div>
+
+    <p class="callout"><b>想站上这个舞台吗？</b>2026 年招新正在进行，填写报名表，下一年五月灯亮起的时候，台上可能就有你。</p>
+
+    <div class="cta">
+      <a class="mcbtn" href="zhu-0338-work2.html">返回吉他社招新网页</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-grass" aria-hidden="true"></div>
+  <div class="footer-main">
+    <span class="fbrand">校园吉他社 · 2026 招新</span>
+    琴房 201 的灯，一直为喜欢吉他的人亮着
+  </div>
+</footer>
+
+</body>
+</html>

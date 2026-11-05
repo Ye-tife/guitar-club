@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="校园吉他社 2026 年招新 · 方块世界的吉他轻语：社团简介、活动安排、风采展示、社员故事与在线报名。">
+<title>校园吉他社 2026 年招新 · 方块世界的吉他轻语</title>
+<link rel="icon" type="image/png" href="img/icon-guitar.png">
+<link rel="preload" as="font" type="font/woff2" href="fonts/zpix.woff2" crossorigin>
+<link rel="preload" as="image" href="img/mc-hero.jpg">
+<style>
+  /* ================= 像素字体 ================= */
+  @font-face{
+    font-family:"Zpix";
+    src:url("fonts/zpix.woff2") format("woff2");
+    font-weight:400;font-style:normal;font-display:swap;
+  }
+
+  /* ================= 基础变量 ================= */
+  :root{
+    --bg:#0d0f14;
+    --panel:#191c23;
+    --panel-2:#1e222b;
+    --panel-3:#242a35;
+    --slot:#2a2e38;
+    --line:#000;
+    --text:#e8eaee;
+    --body:#d3d7de;
+    --muted:#969ca8;
+    --gold:#ffe9a8;
+    --amber:#f0a63c;
+    --grass:#5f9b34;
+    --grass-l:#87c94f;
+    --grass-d:#3f6a20;
+    --xp:#7ad13f;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Zpix","Microsoft YaHei",monospace;
+    font-size:16px;line-height:1.95;
+    -webkit-font-smoothing:none;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:url("img/tex-stone.png") repeat;
+    background-size:96px;
+    image-rendering:pixelated;
+    opacity:.13;
+  }
+  body::after{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(900px 520px at 78% -6%, rgba(240,166,60,.13), transparent 62%),
+      radial-gradient(760px 480px at 4% 34%, rgba(95,155,52,.10), transparent 60%),
+      linear-gradient(180deg, rgba(13,15,20,.2), rgba(13,15,20,.65));
+  }
+  img{max-width:100%;display:block;}
+  a{color:var(--gold);text-decoration:none;}
+  .px{image-rendering:pixelated;}
+  ::selection{background:#5f9b34;color:#fff;}
+  .wrap{width:min(1080px,92vw);margin:0 auto;position:relative;z-index:2;}
+
+  /* ================= 左上角：唱片机（背景音乐） ================= */
+  .jukebox{
+    position:fixed;left:16px;top:12px;z-index:130;
+    display:flex;align-items:center;gap:10px;
+    padding:7px 14px 7px 8px;
+    background:#2b2118;
+    border:3px solid var(--line);
+    box-shadow:inset 3px 3px 0 #5a4630, inset -3px -3px 0 #150f09, 0 6px 0 rgba(0,0,0,.45);
+    color:var(--gold);font-family:"Zpix",monospace;font-size:13px;letter-spacing:.06em;
+    cursor:pointer;transition:background .2s;
+  }
+  .jukebox:hover{background:#392c1f;}
+  .jukebox .disc{width:26px;height:26px;image-rendering:pixelated;}
+  .jukebox.playing .disc{animation:spin 2.6s steps(8,end) infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
+  .jukebox .bars{display:none;gap:2px;align-items:flex-end;height:14px;}
+  .jukebox.playing .bars{display:flex;}
+  .jukebox .bars i{display:block;width:3px;height:4px;background:var(--grass-l);animation:eq 0.9s steps(3,end) infinite;}
+  .jukebox .bars i:nth-child(2){animation-delay:.15s;}
+  .jukebox .bars i:nth-child(3){animation-delay:.3s;}
+  .jukebox .bars i:nth-child(4){animation-delay:.45s;}
+  @keyframes eq{0%,100%{height:4px;}50%{height:14px;}}
+
+  .music-hint{
+    position:fixed;left:16px;top:64px;z-index:130;
+    background:#1b1f27;border:2px solid #000;
+    box-shadow:inset 2px 2px 0 #3a4149, 0 6px 0 rgba(0,0,0,.4);
+    color:#cfd3da;font-size:12px;padding:7px 12px;
+    opacity:0;transform:translateY(-6px);pointer-events:none;transition:.3s;
+  }
+  .music-hint.show{opacity:1;transform:none;}
+
+  /* ================= 顶部热键栏导航 ================= */
+  .hotbar{
+    position:sticky;top:0;z-index:100;
+    background:rgba(10,12,16,.9);
+    border-bottom:3px solid #000;
+    box-shadow:0 3px 0 rgba(255,255,255,.05);
+  }
+  .hotbar .inner{
+    width:min(1160px,96vw);margin:0 auto;
+    display:flex;align-items:center;justify-content:flex-end;gap:7px;
+    padding:9px 0 9px 180px;flex-wrap:wrap;
+  }
+  .hotbar .brand{
+    margin-right:auto;font-size:14px;color:var(--gold);
+    letter-spacing:.06em;text-shadow:2px 2px 0 #000;white-space:nowrap;
+  }
+  .hotbar .brand img{width:18px;height:18px;display:inline-block;vertical-align:-4px;margin-right:6px;image-rendering:pixelated;}
+  .slot{
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--slot);border:2px solid #000;
+    box-shadow:inset 2px 2px 0 #454b57, inset -2px -2px 0 #14161b;
+    color:#cfd4dc;font-size:13.5px;letter-spacing:.04em;
+    padding:7px 13px;transition:.15s;white-space:nowrap;
+  }
+  .slot:hover{background:#39404c;color:#fff;}
+  .slot.active{
+    border-color:#ffe9a8;
+    box-shadow:inset 2px 2px 0 #ffe9a8, inset -2px -2px 0 #a37b1f;
+    color:#fff;
+  }
+  .slot .num{color:#8b929e;font-size:11.5px;}
+
+  /* ================= 首屏 ================= */
+  .hero{
+    position:relative;min-height:calc(100vh - 58px);
+    display:grid;place-items:center;
+    padding:74px 0 46px;
+    overflow:hidden;
+  }
+  .hero-sky{
+    position:absolute;inset:0;
+    background:url("img/mc-hero.jpg") center 42%/cover no-repeat;
+    image-rendering:pixelated;
+    opacity:.85;
+  }
+  .hero::after{
+    content:"";position:absolute;inset:0;
+    background:
+      linear-gradient(180deg, rgba(8,10,14,.5) 0%, rgba(8,10,14,.32) 42%, rgba(10,12,16,.9) 88%, rgba(10,12,16,.98) 100%);
+  }
+  .hero-inner{position:relative;z-index:3;text-align:center;width:min(960px,94vw);}
+  .hero-tag{
+    display:inline-block;margin-bottom:26px;
+    background:rgba(10,12,16,.72);border:2px solid #000;
+    box-shadow:inset 2px 2px 0 rgba(255,255,255,.14), inset -2px -2px 0 rgba(0,0,0,.6);
+    color:var(--grass-l);font-size:12.5px;letter-spacing:.2em;padding:7px 16px;
+  }
+  .hero h1{
+    margin:0;
+    font-size:clamp(46px,9vw,100px);
+    line-height:1.18;letter-spacing:.02em;
+    color:#fff7e2;
+    text-shadow:
+      4px 0 0 #141414, -4px 0 0 #141414, 0 4px 0 #141414, 0 -4px 0 #141414,
+      4px 4px 0 #141414, -4px -4px 0 #141414, 4px -4px 0 #141414, -4px 4px 0 #141414,
+      0 14px 0 rgba(0,0,0,.35);
+  }
+  .hero .sub{
+    margin:22px 0 0;
+    font-size:clamp(18px,3vw,30px);
+    color:#ffe9a8;letter-spacing:.14em;
+    text-shadow:3px 3px 0 #1b1206, 0 3px 0 #1b1206, 3px 0 0 #1b1206;
+  }
+  .hero .tip{
+    margin:24px auto 0;max-width:660px;
+    color:#e3e6ea;font-size:15px;letter-spacing:.04em;
+    background:rgba(9,11,15,.62);border-left:4px solid var(--grass);
+    padding:10px 16px;text-align:left;
+  }
+  .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-top:36px;}
+  .mcbtn{
+    display:inline-flex;align-items:center;justify-content:center;gap:8px;
+    font-family:"Zpix",monospace;font-size:16px;letter-spacing:.1em;
+    color:#fff;background:#6d737e;
+    border:3px solid #000;
+    box-shadow:inset 3px 3px 0 #9aa1ad, inset -3px -3px 0 #3a3f47, 0 6px 0 rgba(0,0,0,.5);
+    padding:13px 30px;cursor:pointer;transition:.12s;
+    text-shadow:2px 2px 0 rgba(0,0,0,.6);
+  }
+  .mcbtn:hover{background:#7d848f;color:#fff;}
+  .mcbtn:active{transform:translateY(3px);box-shadow:inset 3px 3px 0 #9aa1ad, inset -3px -3px 0 #3a3f47, 0 2px 0 rgba(0,0,0,.5);}
+  .mcbtn.green{
+    background:linear-gradient(180deg,#6aa93c,#4a7726);
+    box-shadow:inset 3px 3px 0 #9fd76a, inset -3px -3px 0 #2c4914, 0 6px 0 rgba(0,0,0,.5);
+  }
+  .mcbtn.green:hover{background:linear-gradient(180deg,#7cbe48,#55902b);color:#fff;}
+
+  .hero-stats{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:52px;}
+  .inv{
+    display:flex;align-items:center;gap:12px;
+    background:rgba(9,11,15,.72);
+    border:2px solid #000;
+    box-shadow:inset 2px 2px 0 rgba(255,255,255,.12), inset -2px -2px 0 rgba(0,0,0,.7);
+    padding:10px 16px;min-width:148px;
+  }
+  .inv img{width:30px;height:30px;image-rendering:pixelated;}
+  .inv b{display:block;font-size:20px;color:var(--gold);line-height:1.2;text-shadow:2px 2px 0 #000;}
+  .inv span{font-size:11.5px;color:var(--muted);letter-spacing:.04em;}
+  .scroll-tip{
+    position:absolute;left:50%;bottom:20px;transform:translateX(-50%);z-index:3;
+    color:#b9bfc9;font-size:12px;letter-spacing:.2em;text-align:center;
+  }
+  .scroll-tip::after{
+    content:"";display:block;width:18px;height:18px;margin:8px auto 0;
+    background:url("img/icon-arrow.png") center/contain no-repeat;
+    image-rendering:pixelated;animation:bob 1.4s steps(2,end) infinite;
+  }
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+  .grassline{
+    height:34px;
+    background:url("img/tex-grass-side.png") repeat-x;
+    background-size:auto 34px;
+    image-rendering:pixelated;
+    border-top:6px solid var(--grass-l);
+    border-bottom:3px solid #000;
+    box-shadow:0 -3px 0 rgba(0,0,0,.35);
+  }
+
+  /* ================= 快速传送 ================= */
+  .quick{padding:40px 0 6px;text-align:center;}
+  .quick p{margin:0 0 16px;color:var(--muted);font-size:12px;letter-spacing:.3em;}
+  .quick .links{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;}
+
+  /* ================= 板块通用 ================= */
+  .sec{padding:78px 0 6px;position:relative;scroll-margin-top:86px;}
+  .sechead{margin-bottom:30px;}
+  .sechead .row{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;}
+  .seckey{font-size:13px;color:var(--grass-l);letter-spacing:.16em;text-shadow:2px 2px 0 #000;}
+  .sechead h2{
+    margin:0;font-size:clamp(26px,3.6vw,36px);
+    color:#fdf4dd;letter-spacing:.06em;font-weight:400;
+    text-shadow:3px 3px 0 #000;
+  }
+  .sechead .en{font-size:12px;color:var(--muted);letter-spacing:.24em;}
+  .rule{
+    margin-top:14px;height:6px;
+    background:repeating-linear-gradient(90deg,#3b414b 0 8px,transparent 8px 14px);
+  }
+  .panel{
+    position:relative;
+    background:rgba(23,26,33,.94);
+    border:3px solid #000;
+    box-shadow:inset 3px 3px 0 rgba(255,255,255,.07), inset -3px -3px 0 rgba(0,0,0,.65), 0 10px 0 rgba(0,0,0,.3);
+    padding:clamp(20px,4vw,40px);
+    overflow:hidden;
+  }
+  .panel::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:url("img/tex-plank.png") repeat;background-size:96px;
+    image-rendering:pixelated;opacity:.05;
+  }
+  .panel > *{position:relative;z-index:1;}
+  .text{max-width:880px;margin:0 auto;}
+  .text p{margin:0 0 20px;color:var(--body);text-align:justify;text-justify:inter-ideograph;}
+  .text p:last-child{margin-bottom:0;}
+  .text p.first::first-letter{
+    font-size:1.7em;color:var(--grass-l);float:left;
+    line-height:1.3;padding:3px 8px 0 0;text-shadow:2px 2px 0 #000;
+  }
+
+  .totop-row{display:flex;justify-content:flex-end;margin-top:26px;}
+  .totop{
+    display:inline-flex;align-items:center;gap:8px;
+    font-size:13px;color:#cfd4dc;letter-spacing:.06em;
+    background:var(--slot);border:2px solid #000;
+    box-shadow:inset 2px 2px 0 #454b57, inset -2px -2px 0 #14161b;
+    padding:8px 16px;transition:.15s;
+  }
+  .totop img{width:14px;height:14px;image-rendering:pixelated;}
+  .totop:hover{background:#39404c;color:var(--gold);}
+
+  /* ================= 活动安排表格 ================= */
+  .table-wrap{margin-top:26px;overflow-x:auto;border:3px solid #000;box-shadow:0 10px 0 rgba(0,0,0,.3);}
+  table.schedule{width:100%;border-collapse:collapse;min-width:680px;background:#14171d;font-size:14.5px;}
+  table.schedule th,table.schedule td{
+    border:2px solid #000;padding:13px 14px;text-align:center;vertical-align:middle;
+    color:var(--body);
+  }
+  table.schedule thead tr.headrow th{
+    background:linear-gradient(180deg,#5f9b34,#41681f);
+    color:#f2fae8;font-size:17px;letter-spacing:.14em;padding:20px 14px;
+    text-shadow:2px 2px 0 #22350f;
+    box-shadow:inset 0 3px 0 rgba(255,255,255,.28), inset 0 -3px 0 rgba(0,0,0,.35);
+  }
+  table.schedule thead tr.colrow th{
+    background:#2b303a;color:#eaeef4;letter-spacing:.12em;font-size:14.5px;
+    box-shadow:inset 0 2px 0 rgba(255,255,255,.12), inset 0 -2px 0 rgba(0,0,0,.5);
+  }
+  table.schedule tbody td{background:#191c23;}
+  table.schedule tbody tr:nth-child(even) td{background:#1f232c;}
+  table.schedule tbody tr:hover td{background:#262c38;}
+  table.schedule td.name{color:#fff;letter-spacing:.03em;text-align:left;}
+  table.schedule td.same-room{
+    background:rgba(95,155,52,.16) !important;
+    color:#dff0cf;
+  }
+  .tag{
+    display:inline-block;margin-left:8px;padding:0 7px;
+    font-size:11px;line-height:18px;color:#14200b;
+    background:#9fd76a;border:2px solid #2c4914;vertical-align:1px;letter-spacing:.02em;
+  }
+  .note{margin:18px 0 0;font-size:13.5px;color:var(--muted);letter-spacing:.02em;}
+  .note b{color:var(--grass-l);}
+
+  /* ================= 风采展示：画框 + 视频 ================= */
+  .painting{
+    display:inline-block;position:relative;
+    padding:12px;background:url("img/tex-plank.png") repeat;background-size:72px;
+    image-rendering:pixelated;
+    border:3px solid #000;
+    box-shadow:inset 0 0 0 2px rgba(0,0,0,.45), 0 14px 0 rgba(0,0,0,.32);
+  }
+  .painting img{image-rendering:pixelated;border:2px solid #000;width:100%;height:auto;}
+  .photo-wrap{margin-top:30px;text-align:center;}
+  .photo-link{display:inline-block;position:relative;max-width:820px;}
+  .photo-link::after{
+    content:"点击查看活动详情 ▶";
+    position:absolute;left:50%;bottom:22px;transform:translateX(-50%) translateY(8px);
+    background:#1b1f27;border:2px solid #000;
+    box-shadow:inset 2px 2px 0 #454b57, inset -2px -2px 0 #14161b;
+    color:var(--gold);font-size:13px;padding:7px 16px;
+    opacity:0;transition:.25s;white-space:nowrap;
+  }
+  .photo-link:hover::after{opacity:1;transform:translateX(-50%) translateY(0);}
+  .photo-link:hover img{filter:brightness(1.08) saturate(1.05);}
+  .photo-cap{margin:18px 0 0;font-size:13px;color:var(--muted);letter-spacing:.04em;}
+
+  .video-block{margin-top:52px;}
+  .video-block h3{
+    margin:0 0 8px;font-size:20px;font-weight:400;color:#fdf4dd;
+    letter-spacing:.08em;text-shadow:2px 2px 0 #000;
+  }
+  .video-block .hint{margin:0 0 18px;font-size:13px;color:var(--muted);}
+  .video-frame{
+    display:block;margin:0 auto;max-width:880px;width:100%;
+    padding:12px;background:url("img/tex-plank.png") repeat;background-size:72px;
+    image-rendering:pixelated;border:3px solid #000;
+    box-shadow:inset 0 0 0 2px rgba(0,0,0,.45), 0 14px 0 rgba(0,0,0,.32);
+  }
+  .video-frame .inner{background:#000;border:2px solid #000;position:relative;}
+  .video-frame .inner::after{
+    content:"▶ 点击播放宣传片";
+    position:absolute;left:14px;top:12px;
+    background:rgba(0,0,0,.55);border:2px solid rgba(255,233,168,.45);
+    color:var(--gold);font-size:12px;letter-spacing:.06em;padding:3px 10px;
+    pointer-events:none;transition:opacity .2s;
+  }
+  .video-frame.played .inner::after{opacity:0;}
+  .video-frame embed{display:block;width:100%;height:auto;aspect-ratio:16/9;}
+  /* 两张图片的网格 */
+  .photo-grid{
+    display:grid;grid-template-columns:1.3fr 1fr;gap:14px;
+    align-items:start;margin-top:30px;text-align:center;
+  }
+  .photo-grid .photo-link{max-width:none;}
+  .photo-grid .painting{display:block;}
+  .photo-grid .painting img{width:100%;}
+  .photo-cap{margin:18px 0 0;font-size:13px;color:var(--muted);letter-spacing:.04em;text-align:center;}
+
+  /* ================= 社员故事 ================= */
+  .stories{display:grid;gap:18px;margin-top:28px;}
+  .stories-lead{margin:0 0 6px;color:var(--muted);font-size:15px;letter-spacing:.02em;}
+  .story{
+    display:grid;grid-template-columns:76px 1fr;gap:18px;
+    background:#191c23;border:3px solid #000;
+    box-shadow:inset 3px 3px 0 rgba(255,255,255,.06), inset -3px -3px 0 rgba(0,0,0,.6);
+    padding:22px;
+  }
+  .story .avatar{
+    width:76px;height:76px;image-rendering:pixelated;
+    border:3px solid #000;
+    box-shadow:inset 0 0 0 2px rgba(255,255,255,.12);
+    background:#0f1116;
+  }
+  .story .who{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px;}
+  .story .who b{font-size:19px;color:var(--gold);letter-spacing:.06em;text-shadow:2px 2px 0 #000;font-weight:400;}
+  .story .who span{font-size:12.5px;color:var(--muted);letter-spacing:.02em;}
+  .story p{margin:0;color:var(--body);text-align:justify;font-size:15.5px;max-width:820px;}
+
+  /* ================= 报名表 ================= */
+  .form-table{width:100%;border-collapse:collapse;}
+  .form-table th{
+    width:200px;text-align:right;vertical-align:top;
+    padding:16px 22px 0 0;font-weight:400;font-size:15px;
+    color:var(--gold);letter-spacing:.04em;white-space:nowrap;
+  }
+  .form-table td{vertical-align:top;padding:8px 0;}
+  .inp,.sel,.tar{
+    width:100%;max-width:100%;
+    background:#0a0b0f;color:#fff;
+    border:2px solid #000;
+    box-shadow:inset 2px 2px 0 rgba(0,0,0,.9), inset -2px -2px 0 rgba(255,255,255,.09);
+    font-family:"Zpix",monospace;font-size:15px;
+    padding:11px 13px;outline:none;
+  }
+  .inp::placeholder,.tar::placeholder{color:#6f7580;}
+  .inp:focus,.sel:focus,.tar:focus{border-color:var(--gold);box-shadow:inset 2px 2px 0 rgba(0,0,0,.9), inset -2px -2px 0 rgba(255,233,168,.25), 0 0 0 2px rgba(255,233,168,.18);}
+  .inp.short{max-width:96px;display:inline-block;}
+  .date-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:14px;}
+  .radio-row,.check-row{display:flex;flex-wrap:wrap;gap:8px 20px;padding-top:11px;}
+  .radio-row label,.check-row label{
+    display:inline-flex;align-items:center;gap:8px;font-size:15px;color:#dcdfe5;cursor:pointer;
+  }
+  .radio-row label:hover,.check-row label:hover{color:var(--gold);}
+  .radio-row input,.check-row input{width:15px;height:15px;accent-color:#6aa93c;cursor:pointer;}
+  .sel option{background:#14171d;color:#fff;}
+  .tar{min-height:120px;resize:vertical;line-height:1.8;}
+  .form-actions{display:flex;gap:14px;flex-wrap:wrap;margin:6px 0 0;}
+  .form-tip{margin:14px 0 0;font-size:12.5px;color:var(--muted);}
+
+  /* ================= 页脚 ================= */
+  footer{margin-top:96px;position:relative;z-index:2;}
+  .footer-grass{
+    height:26px;background:url("img/tex-grass-side.png") repeat-x;background-size:auto 26px;
+    image-rendering:pixelated;border-top:5px solid var(--grass-l);border-bottom:3px solid #000;
+  }
+  .footer-main{
+    background:#0b0d11;border-bottom:1px solid #000;
+    padding:40px 0 34px;color:var(--muted);font-size:13px;
+  }
+  .footer-main .row{display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;}
+  .footer-main .fbrand{font-size:16px;color:var(--gold);letter-spacing:.14em;text-shadow:2px 2px 0 #000;}
+  .footer-main .flinks a{margin-left:18px;color:#cfd4dc;}
+  .footer-main .flinks a:hover{color:var(--gold);}
+
+  /* ================= 固定元素 ================= */
+  #toTop{
+    position:fixed;right:20px;bottom:38px;z-index:120;
+    width:48px;height:48px;padding:10px;
+    background:var(--slot);border:3px solid #000;
+    box-shadow:inset 2px 2px 0 #454b57, inset -2px -2px 0 #14161b, 0 6px 0 rgba(0,0,0,.45);
+    cursor:pointer;opacity:0;pointer-events:none;transform:translateY(10px);transition:.25s;
+  }
+  #toTop img{width:100%;height:100%;image-rendering:pixelated;}
+  #toTop.show{opacity:1;pointer-events:auto;transform:none;}
+  #toTop:hover{background:#39404c;}
+
+  .xpbar{position:fixed;left:0;right:0;bottom:0;height:12px;z-index:110;background:#07080b;border-top:2px solid #000;}
+  .xpbar i{display:block;height:100%;width:0;background:linear-gradient(180deg,#a4e85f,#5aa62a);box-shadow:inset 0 3px 0 rgba(255,255,255,.4);}
+
+  .achv{
+    position:fixed;right:16px;top:78px;z-index:140;
+    display:flex;align-items:center;gap:12px;
+    background:#20242c;border:3px solid #000;
+    box-shadow:inset 3px 3px 0 #3d434d, inset -3px -3px 0 #05060a, 0 10px 0 rgba(0,0,0,.4);
+    padding:12px 18px;max-width:320px;
+    transform:translateX(130%);transition:transform .45s steps(5,end);
+  }
+  .achv.show{transform:none;}
+  .achv img{width:34px;height:34px;image-rendering:pixelated;}
+  .achv b{display:block;color:#ffe27a;font-size:13px;letter-spacing:.06em;}
+  .achv span{display:block;color:#c9cdd4;font-size:12px;margin-top:2px;}
+
+  .toast{
+    position:fixed;left:50%;bottom:40px;transform:translate(-50%,16px);
+    background:#1b1f27;border:2px solid #000;
+    box-shadow:inset 2px 2px 0 #454b57, inset -2px -2px 0 #14161b, 0 10px 0 rgba(0,0,0,.4);
+    color:#fff;font-size:14px;padding:12px 22px;z-index:150;
+    opacity:0;pointer-events:none;transition:.3s;
+  }
+  .toast.show{opacity:1;transform:translate(-50%,0);}
+
+  /* ================= 漂浮方块 ================= */
+  .floaters{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;}
+  .floater{
+    position:absolute;width:40px;height:40px;
+    background-size:100% 100%;image-rendering:pixelated;
+    box-shadow:0 6px 0 rgba(0,0,0,.28);
+    animation:float 6s steps(12,end) infinite;
+  }
+  .floater.f1{left:8%;top:26%;background-image:url("img/tex-grass-side.png");}
+  .floater.f2{right:9%;top:20%;width:32px;height:32px;background-image:url("img/tex-dirt.png");animation-delay:1.2s;}
+  .floater.f3{left:14%;bottom:24%;width:28px;height:28px;background-image:url("img/tex-plank.png");animation-delay:2.1s;}
+  .floater.f4{right:15%;bottom:30%;background-image:url("img/icon-creeper.png");background-color:transparent;box-shadow:none;animation-delay:.7s;}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-14px);}}
+
+  /* ================= 入场动画 ================= */
+  .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s steps(6,end),transform .5s steps(6,end);}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){
+    .reveal{opacity:1;transform:none;transition:none;}
+    html{scroll-behavior:auto;}
+    .jukebox.playing .disc,.jukebox .bars i,.floater,.scroll-tip::after{animation:none;}
+  }
+
+  /* ================= 响应式 ================= */
+  @media (max-width:860px){
+    body{font-size:15px;}
+    .hotbar .inner{padding:8px 8px 8px 60px;justify-content:flex-start;gap:6px;}
+    .hotbar .brand{display:none;}
+    .slot{font-size:12.5px;padding:6px 10px;}
+    .jukebox{left:8px;top:8px;padding:6px;}
+    .jukebox .disc{width:24px;height:24px;}
+    .jukebox #bgmText{display:none;}
+    .music-hint{left:8px;top:58px;}
+    .hero{min-height:auto;padding:96px 0 26px;}
+    .scroll-tip{position:relative;left:auto;bottom:auto;transform:none;margin:26px auto 0;}
+    .scroll-tip::after{margin-top:4px;}
+    .hero .tip{font-size:14px;}
+    .sec{padding-top:56px;}
+    .story{grid-template-columns:56px 1fr;gap:14px;padding:16px;}
+    .story .avatar{width:56px;height:56px;}
+    .photo-grid{grid-template-columns:1fr;}
+    .form-table,.form-table tbody,.form-table tr,.form-table th,.form-table td{display:block;width:100%;}
+    .form-table th{text-align:left;padding:0 0 6px 2px;}
+    .form-table tr{margin-bottom:16px;}
+    .form-actions .mcbtn{flex:1 1 100%;}
+    .achv{max-width:calc(100vw - 32px);top:62px;}
+    #toTop{right:12px;bottom:30px;width:42px;height:42px;padding:8px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 成就弹窗（MC 风） ============ -->
+<div class="achv" id="achv">
+  <img src="img/icon-creeper.png" alt="">
+  <div>
+    <b>成就达成！</b>
+    <span>你发现了「校园吉他社 2026 年招新」</span>
+  </div>
+</div>
+
+<!-- ============ 左上角背景音乐（参考 ex3_23） ============ -->
+<button class="jukebox" id="bgmBtn" type="button" aria-label="播放或暂停背景音乐" title="点击播放 / 暂停背景音乐">
+  <img class="disc" src="img/icon-disc.png" alt="">
+  <span id="bgmText">背景音乐</span>
+  <span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+</button>
+<div class="music-hint" id="musicHint">点左上角唱片机，听社歌《方块世界的吉他轻语》</div>
+<audio id="bgm" src="bgm.mp3" loop="loop" preload="auto" controls="controls" autoplay="autoplay" style="display:none">
+  您的浏览器不支持 audio 标签。
+</audio>
+
+<!-- ============ 热键栏导航 ============ -->
+<nav class="hotbar">
+  <div class="inner">
+    <span class="brand"><img src="img/icon-guitar.png" alt="">校园吉他社 · 2026</span>
+    <a class="slot" href="#intro"><span class="num">1</span>社团简介</a>
+    <a class="slot" href="#activities"><span class="num">2</span>活动安排</a>
+    <a class="slot" href="#show"><span class="num">3</span>风采展示</a>
+    <a class="slot" href="#stories"><span class="num">4</span>社员故事</a>
+    <a class="slot" href="#signup"><span class="num">5</span>在线报名</a>
+  </div>
+</nav>
+
+<!-- ============ 首屏 ============ -->
+<header class="hero" id="top">
+  <div class="hero-sky" aria-hidden="true"></div>
+  <div class="floaters" aria-hidden="true">
+    <span class="floater f1"></span>
+    <span class="floater f2"></span>
+    <span class="floater f3"></span>
+    <span class="floater f4"></span>
+  </div>
+  <div class="hero-inner">
+    <div class="hero-tag">EST. 2015 · 学生活动中心 201</div>
+    <h1>校园吉他社</h1>
+    <div class="sub">2026 年招新</div>
+    <p class="tip">把青春弹给你听 —— 每周三、五晚七点，学生活动中心 201 等你</p>
+    <div class="hero-btns">
+      <a class="mcbtn green" href="#signup">我要报名</a>
+      <a class="mcbtn" href="#intro">了解社团</a>
+    </div>
+    <div class="hero-stats">
+      <div class="inv"><img src="img/icon-disc.png" alt=""><div><b>11</b><span>年 · 弦上青春</span></div></div>
+      <div class="inv"><img src="img/icon-guitar.png" alt=""><div><b>67</b><span>位 · 在册社员</span></div></div>
+      <div class="inv"><img src="img/icon-heart.png" alt=""><div><b>7</b><span>把 · 免费借用琴</span></div></div>
+      <div class="inv"><img src="img/icon-creeper.png" alt=""><div><b>3</b><span>场 · 年度专场</span></div></div>
+    </div>
+  </div>
+  <div class="scroll-tip">向下滚动 · 认识我们</div>
+</header>
+<div class="grassline" aria-hidden="true"></div>
+
+<!-- ============ 快速传送（页内锚点，参考 ex3_12） ============ -->
+<section class="quick">
+  <div class="wrap">
+    <p>QUICK TELEPORT · 快速传送</p>
+    <div class="links">
+      <a class="slot" href="#intro">社团简介</a>
+      <a class="slot" href="#activities">活动安排</a>
+      <a class="slot" href="#show">风采展示</a>
+      <a class="slot" href="#stories">社员故事</a>
+      <a class="slot" href="#signup">在线报名</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 一、社团简介 ============ -->
+<section class="sec" id="intro">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <div class="row">
+        <span class="seckey">[ 01 ]</span>
+        <h2>社团简介</h2>
+        <span class="en">ABOUT US</span>
+      </div>
+      <div class="rule"></div>
+    </div>
+    <div class="panel reveal">
+      <div class="text">
+        <p>2015 年秋天，六个男生把两把二手吉他、一个非洲鼓和一张手写的「吉他社招新处」纸牌搬进了学生活动中心 201。那天下午刚下过雨，窗玻璃上挂着水珠，朝西的窗户把四点半的阳光斜斜地投在琴箱上。房间原本堆着军训剩下的旧桌椅，他们花了两个周末才清出能坐下二十个人的地方。第一任社长陈默把社团章程写在半页稿纸上，一共四条：不收费、不考核、不吵架、每周至少来一次。第一年社团只有十一个社员，期末在食堂门口唱了一晚上，有人端着餐盘站了半个钟头，听完才想起菜已经凉了。十一年过去，名单换了一茬又一茬，201 的钥匙从一个人手里交到另一个人手里，那间琴房的灯还亮着。社团的名字一直没改，就叫校园吉他社，没有更花哨的缩写，也没有换届时为改 Logo 吵过的架——大家默契地觉得，一把木吉他就够了。</p>
+      <p>今天的吉他社有六十七名在册社员，从刚入学的大一新生到研三的都有。每周三、周五晚上七点到九点半是固定的练琴时间，门一推开，先听见的是调弦的细碎声响，然后是此起彼伏的「再弹一遍」「手腕松一点」「那个小节再来一次」。我们不设入社考核，也不要求你在报名前会任何东西——社里一半以上的人，去年九月还不知道 C 和弦怎么按，第一次摸琴时连琴颈该朝哪边都要犹豫几秒。开学第三周，每位新生会分到一位带教的学长或学姐，一对一，从持琴的姿势、右手分解的节拍、怎样按弦手才不疼讲起；一节课只讲一件小事，讲完就坐在你旁边，听你把这件小事练到会为止。练不会也没关系，带教会把自己的琴借给你，说「我刚学的时候比你还慢」。很多人就是这样把第一个和弦按响的，那一声闷闷的「噔」，是整个大学里最好听的声音之一。201 的墙上贴着历任社长的合照，最早那张是 2015 年的，六个人挤在一起，有人怀里抱着鼓，笑得眼睛都看不见。</p>
+      <p>方向很杂，这也是吉他社最好玩的地方。想自弹自唱的去弹唱组，每周凑在一起互相点歌、互相听跑调；喜欢一个人把一段旋律完整弹下来的去指弹组，琴房里常常只剩节拍器和指甲敲在琴面上的轻响；想组乐队的可以在社内找鼓手和贝斯，201 隔壁小排练间的墙上常年贴着招募鼓手的便签；写歌的每周日下午包场，谁有半首没写完的旋律，都可以拿出来让大家帮着填一句词。社里一年有几件固定的大事：春天在图书馆前的草地上办弹唱会，几十个人坐在野餐垫上，谁想唱就走到中间那支麦克风前唱一首，跑调了也没人笑；五月是「夏日之声」校园吉他音乐会，灯光一亮，就是正经的舞台；学期末还有一场专场音乐会，曲目编排、海报设计、舞台走位，全部由社员自己张罗。还有一件小事：社里常年留着七把备用琴，手上没琴的人可以在 201 登记后借回宿舍练，琴弦断了社团报销，不用你开口。</p>
+      <p>如果你是 2026 级新生，九月十四号到十八号，学生活动中心门口的招新摊位会摆一把谁都能试弹的木吉他，旁边放一沓谱子，翻到哪页算哪页。不想弹也没关系，来坐一会儿，听完一首歌再走，桌上还有热水和一次性杯子，杯子是去年买多了剩下的。报名不看基础、不看颜值、不看你唱歌跑不跑调，我们只在意一件事：你愿不愿意每周拿出两个晚上，和一群同样喜欢吉他的人待在一起。入社后，你会先在见面会上认识自己的带教，参加第一次合奏，也许下一个在草地弹唱会上唱出第一首歌的人就是你。很多人毕业后会忘记大学第一学期选了什么课，但大概会记得 201 那盏黄灯、那个掉漆的谱架、那张坐塌了一角的旧沙发，还有一圈为你打拍子的手掌。</p>
+      </div>
+    </div>
+    <div class="totop-row reveal">
+      <a class="totop" href="#top"><img src="img/icon-arrow.png" alt="">返回顶部</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 二、活动安排（colspan / rowspan，参考 ex3_16） ============ -->
+<section class="sec" id="activities">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <div class="row">
+        <span class="seckey">[ 02 ]</span>
+        <h2>活动安排</h2>
+        <span class="en">SCHEDULE · 2026 春</span>
+      </div>
+      <div class="rule"></div>
+    </div>
+    <div class="panel reveal">
+      <div class="text">
+        <p>活动安排不复杂，基本都围绕每周三、周五晚的练琴展开：前半小时自由练琴，谁有卡住的段落可以举手，老社员会过来一起看；后面两个小时按小组分开，弹唱组围成一圈轮流过歌，指弹组各戴一副耳机，乐队组在隔壁小房间试音，声音会从门缝里漏出来。下面这张表里的时间都是暂定的，具体以社团群里的通知为准。要提醒一句：新成员见面会和吉他基础教学公开课在同一个教室，都是学生活动中心 201。第一次来的话提前十分钟，从侧门上二楼，看到门口贴着一把黑色小吉他贴纸的就是。第一次不用带琴，人到了就行。表格里负责人的名字，就是当天在现场举着手机看流程的人，找不到路、借不到琴，都可以直接问他。</p>
+      </div>
+    </div>
+
+    <div class="table-wrap reveal">
+      <table class="schedule">
+        <thead>
+          <tr class="headrow">
+            <!-- 第一行：跨 4 列的总标题 -->
+            <th colspan="4">吉他社 2026 年春季学期活动安排表</th>
+          </tr>
+          <tr class="colrow">
+            <!-- 第二行：表头内容居中 -->
+            <th>活动名称</th>
+            <th>活动时间</th>
+            <th>活动地点</th>
+            <th>负责人</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">新成员见面会<span class="tag">必到</span></td>
+            <td>3 月第 2 周 周五 19:00</td>
+            <!-- 与下一行共用同一间教室：rowspan 合并两行 -->
+            <td class="same-room" rowspan="2">学生活动中心<br>音乐教室 201</td>
+            <td>周野</td>
+          </tr>
+          <tr>
+            <td class="name">吉他基础教学公开课<span class="tag">零基础</span></td>
+            <td>3 月第 3 周 周六 14:00</td>
+            <!-- 地点单元格已由上一行 rowspan 合并 -->
+            <td>陈屿</td>
+          </tr>
+          <tr>
+            <td class="name">指弹小组工作坊</td>
+            <td>4 月第 1 周 周日 15:00</td>
+            <td>音乐教室 201 隔壁小排练间</td>
+            <td>陈屿</td>
+          </tr>
+          <tr>
+            <td class="name">校园草地弹唱会</td>
+            <td>4 月第 2 周 周日 16:00</td>
+            <td>图书馆前草坪</td>
+            <td>苏晴</td>
+          </tr>
+          <tr>
+            <td class="name">乐队合练夜</td>
+            <td>5 月第 1 周 周五 19:30</td>
+            <td>学生活动中心 小排练间 202</td>
+            <td>「北门七点」乐队</td>
+          </tr>
+          <tr>
+            <td class="name">「夏日之声」校园吉他音乐会</td>
+            <td>5 月第 3 周 周六 19:00</td>
+            <td>大学生活动中心 一号报告厅</td>
+            <td>林小满</td>
+          </tr>
+          <tr>
+            <td class="name">期末专场音乐会</td>
+            <td>6 月第 1 周 周六 19:00</td>
+            <td>大学生活动中心 大礼堂</td>
+            <td>王砚</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="note reveal"><b>说明：</b>「新成员见面会」与「吉他基础教学公开课」都在<b>学生活动中心 音乐教室 201</b> 举行；时间如有调整，以社团群内通知为准。</p>
+
+    <div class="totop-row reveal">
+      <a class="totop" href="#top"><img src="img/icon-arrow.png" alt="">返回顶部</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 三、风采展示（图片超链接 ex3_19/20 + 视频 ex3_25） ============ -->
+<section class="sec" id="show">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <div class="row">
+        <span class="seckey">[ 03 ]</span>
+        <h2>风采展示</h2>
+        <span class="en">GALLERY</span>
+      </div>
+      <div class="rule"></div>
+    </div>
+    <div class="panel reveal">
+      <div class="text">
+        <p>这一栏放的都是社团日常：201 里下午四点的光、谱架上卷了边的《天空之城》、角落里那只被谁顺手放上去的保温杯，也有草地弹唱会那天有人蹲在音箱旁边调音的背影，还有期末专场后台那张写满名字的手写流程表。照片几乎没有专门摆拍，大多是社员自己举着手机随手拍的，构图歪一点，有点糊，但那一刻是真的。视频是去年「夏日之声」的现场片段，镜头有点抖，能听见前排的人在跟唱，也能听见有人喊了一声「再来一首」。点开下面那张照片，会跳到子页面 club_intro.html，看看今年五月那场音乐会是怎么从一次排练变成一台演出的。如果你在这些照片里认出了自己的宿舍楼、自己的同学，那大概就是你应该来的地方。照片拍得不算好，但每一张都对应一个具体的人、一个具体的下午。有些照片是毕业的学长回来看演出时拍的，发在群里，配文只有四个字：「还是这里」。</p>
+      </div>
+    </div>
+
+    <!-- ===== 图片区：2 张图片，均可在点击后跳转子页面（参考 ex3_19 / ex3_20） ===== -->
+    <div class="photo-grid reveal">
+      <a class="photo-link main" href="club_intro.html" title="点击查看「夏日之声」校园吉他音乐会活动详情">
+        <span class="painting">
+          <img src="img/guitar-club.jpg" alt="吉他社日常演奏照片：社员在音乐教室一起弹琴" width="1024" height="576" loading="lazy">
+        </span>
+      </a>
+      <a class="photo-link" href="club_intro.html" title="点击查看「夏日之声」校园吉他音乐会活动详情">
+        <span class="painting">
+          <img src="img/guitar-club-stage.jpg" alt="「夏日之声」校园吉他音乐会舞台" width="1024" height="576" loading="lazy">
+        </span>
+      </a>
+    </div>
+    <p class="photo-cap">201 的下午四点 · 点开图片，看看今年五月那场音乐会是怎么准备的</p>
+
+    <!-- ===== 视频区：1 个宣传短片（参考 ex3_25） ===== -->
+    <div class="video-block reveal">
+      <h3>社团宣传短片</h3>
+      <p class="hint">参考 ex3_25，用 embed 标签嵌入 mp4 视频</p>
+      <div class="video-frame">
+        <div class="inner">
+          <!-- 多媒体嵌入：mp4 视频 -->
+          <embed src="guitar-club-promo.mp4" type="video/mp4" width="860" height="484" loop="true" autostart="false" title="校园吉他社宣传短片">
+        </div>
+      </div>
+    </div>
+
+    <div class="totop-row reveal">
+      <a class="totop" href="#top"><img src="img/icon-arrow.png" alt="">返回顶部</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 四、社员故事 ============ -->
+<section class="sec" id="stories">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <div class="row">
+        <span class="seckey">[ 04 ]</span>
+        <h2>社员故事</h2>
+        <span class="en">STORIES · 节选</span>
+      </div>
+      <div class="rule"></div>
+    </div>
+    <div class="stories reveal">
+      <p class="stories-lead">社里六十七个人，随便拎出四个，都能讲出一段和吉他有关的日子。</p>
+      <article class="story">
+        <img class="avatar" src="img/stories-lin.png" alt="林小满的像素头像" loading="lazy">
+        <div>
+          <div class="who"><b>林小满</b><span>2024 级数学与应用数学</span></div>
+          <p>她入社前没碰过吉他，第一次见面会坐在最后一排，笔记本上抄满了和弦图的指法，连「Em 和 C 哪个更难」都用铅笔写在了页边。卡住她的是 F 大横按，六根弦要一起按实，练到第七天，食指侧面磨出一排水泡，她用创可贴缠了两圈接着按。带教的周野没让她硬练，而是把琴递过去说：「先按好前四根，剩下两根慢慢来，没人第一天就能按响。」她后来才发现，周野每次下课都会在群里问一句「今天那个 F 按响了吗」，问了一个多月。两周后她在 201 完整弹下第一首《平凡之路》，弹到副歌手抖得厉害，节奏却没错，抬头时发现门口站着三个不认识的社员在听。那天回去她把谱子重抄了一遍，把折痕抚平，夹进课本里。去年十月的草地弹唱会，她坐在麦克风前唱了一遍，唱完才发现手心全是汗，谱子被捏出了折痕。她后来在仓库里翻到一把旧琴，琴头贴着 2016 年的社团贴纸，换完弦居然还能弹。她到现在也不敢说自己会弹吉他，但每天晚自习后还是会绕到 201 门口，听听里面还有没有人在练。</p>
+        </div>
+      </article>
+      <article class="story">
+        <img class="avatar" src="img/stories-chen.png" alt="陈屿的像素头像" loading="lazy">
+        <div>
+          <div class="who"><b>陈屿</b><span>2023 级机械设计制造及其自动化</span></div>
+          <p>他喜欢指弹，手机里存了一百多个自己录的练习视频，最长的一个拍了四十分钟，只因为最后一遍才没有杂音。他练《黄昏》练了整整一个学期，右手拇指的指甲磨出一道浅槽，弹到高把位时左手总要停一停找位置。琴房晚上十点关门，管理阿姨认识他，有时候会多等五分钟，站在门口听他把最后一段过完。他说指弹最难的不是速度，是让一个音停下来的时候，别人还在听。去年期末专场，他独奏了这首曲子，台下有人小声问旁边的人「这真是学生在弹吗」。他听见了，手还是稳的，心里却想笑。演出结束后他把手机里练废的版本删了大半，只留最后那一条，配文是：「第四十七个版本，终于敢发出来了。」第二天早上，那条视频下面多了三十多个赞，和一句带教留下的评论：「我说过你行。」现在他成了别人的带教，第一节课从来不讲技巧，只让新生把手放在琴颈上，感受弦的震动。</p>
+        </div>
+      </article>
+      <article class="story">
+        <img class="avatar" src="img/stories-su.png" alt="苏晴的像素头像" loading="lazy">
+        <div>
+          <div class="who"><b>苏晴</b><span>2022 级新闻学</span></div>
+          <p>她大二那年在 201 认识了三个同样想组乐队的人：一个材料学院的鼓手、一个法学院的贝斯手、一个从小学钢琴的键盘手。乐队取名「北门七点」，因为大家能凑齐的时间只有晚上七点，排练完一起从北门出去吃夜宵，四个人分一碗炒面是常事。那间小排练间隔音不好，鼓一响，隔壁练长笛的就会来敲门，后来大家约好周三晚上归乐队，其他时间谁先到谁用。第一首原创叫《把夏天留在这里》，歌词写的是宿舍楼下的栀子花和毕业季的雨，旋律是在 201 掉的谱架旁边哼出来的。今年五月的「夏日之声」，他们第一次在正式的舞台上唱这首歌，副歌部分台下有人跟着哼，苏晴愣了一下，差点进错拍。下台后四个人在后台击掌，掌心都是热的。现在这首歌的 demo 还躺在社团的录音硬盘里，文件名是「北门七点-最终版-最终版2」，谁也没舍得改。苏晴说，写歌最难的是承认自己写得不好，社团的好处是总有人愿意先听一遍。</p>
+        </div>
+      </article>
+      <article class="story">
+        <img class="avatar" src="img/stories-wang.png" alt="王砚的像素头像" loading="lazy">
+        <div>
+          <div class="who"><b>王砚</b><span>2024 级汉语言文学</span></div>
+          <p>他社恐，入社第一个月几乎不说话，每次练琴都坐在门边，弹完就收琴走，跟人打招呼只用点头。现在他每周五会提前十分钟到 201，帮带教搬凳子，虽然还是话不多。改变发生在一个周五，草地弹唱会散场时突然下雨，一群人挤在 201 门口等雨停，有人起头唱《南方姑娘》，唱到第二段，他不自觉跟了一句，声音很小，但旁边的人听见了。后来大家干脆围成圈，一首接一首地唱，雨停了他也没走。那天晚上他回到宿舍，第一次把《南方姑娘》完整弹了下来。去年学期末的专场，他报了一首《我喜欢上你时的内心活动》，上台前在后台来回走了二十多圈，唱到第二段忘了词，台下的社员从第一排开始一起帮他唱了下去。上个月他主动在见面会上唱了一小段，唱完低头喝水，耳朵红到脖子。现在他会在练琴时多带一个凳子，留给门边那个还没敢开口的新生。他说那一刻他突然明白，这个社团不是让人来表演完美的地方，是让人敢张嘴的地方。他说自己学会的第一件事不是某个和弦，是别人跑调的时候不要笑。他说，等明年这时候，希望那个新生也能唱一首。</p>
+        </div>
+      </article>
+    </div>
+    <div class="totop-row reveal">
+      <a class="totop" href="#top"><img src="img/icon-arrow.png" alt="">返回顶部</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 五、在线报名（表单，参考 ex3_30） ============ -->
+<section class="sec" id="signup">
+  <div class="wrap">
+    <div class="sechead reveal">
+      <div class="row">
+        <span class="seckey">[ 05 ]</span>
+        <h2>在线报名</h2>
+        <span class="en">SIGN UP</span>
+      </div>
+      <div class="rule"></div>
+    </div>
+    <div class="panel reveal">
+      <div class="text">
+        <p>报名表很简单，填完大概三分钟。不用准备作品，不用会看五线谱，也不会有人考你弹得怎么样。手机号尽量填常用的，社团会在报名后一周内发短信，约你来 201 见面聊聊，顺便试弹一下——试弹不是考试，只是看看你习惯用哪只手拨弦。十月十号截止，这一届预计收四十人左右，先报先得。如果填完还想改，重新提交一份最新的就行，不用打招呼。填的时候不用纠结「兴趣方向」选几项，选错了也没关系，来了随时可以换。</p>
+      </div>
+      <form id="signupForm" action="#" method="post" novalidate style="margin-top:30px">
+        <table class="form-table">
+          <tbody>
+          <tr>
+            <th><label for="name">姓名</label></th>
+            <td><input class="inp" type="text" id="name" name="name" placeholder="请输入你的姓名" maxlength="20" required></td>
+          </tr>
+          <tr>
+            <th>性别</th>
+            <td class="radio-row">
+              <label><input type="radio" name="gender" value="男" checked>男</label>
+              <label><input type="radio" name="gender" value="女">女</label>
+            </td>
+          </tr>
+          <tr>
+            <th>出生日期</th>
+            <td>
+              <div class="date-row">
+                <input class="inp short" type="text" name="birth_year" placeholder="1999" maxlength="4" aria-label="出生年份"> 年
+                <input class="inp short" type="text" name="birth_month" placeholder="01" maxlength="2" aria-label="出生月份"> 月
+                <input class="inp short" type="text" name="birth_day" placeholder="01" maxlength="2" aria-label="出生日期"> 日
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>联系方式</th>
+            <td>
+              <div class="date-row" style="flex-wrap:nowrap">
+                <span style="white-space:nowrap">手机：</span>
+                <input class="inp" type="text" name="phone" placeholder="11 位手机号" maxlength="11" style="max-width:240px">
+              </div>
+              <div class="date-row" style="flex-wrap:nowrap;margin-top:10px">
+                <span style="white-space:nowrap">邮箱：</span>
+                <input class="inp" type="text" name="email" placeholder="常用邮箱，用于接收通知" style="max-width:340px">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <th>是否有吉他基础</th>
+            <td class="radio-row">
+              <label><input type="radio" name="base" value="无基础" checked>无基础</label>
+              <label><input type="radio" name="base" value="会几首简单曲目">会几首简单曲目</label>
+              <label><input type="radio" name="base" value="可独立弹唱">可独立弹唱</label>
+            </td>
+          </tr>
+          <tr>
+            <th>兴趣方向（可多选）</th>
+            <td class="check-row">
+              <label><input type="checkbox" name="interest" value="弹唱" checked>弹唱</label>
+              <label><input type="checkbox" name="interest" value="指弹">指弹</label>
+              <label><input type="checkbox" name="interest" value="组建乐队">组建乐队</label>
+              <label><input type="checkbox" name="interest" value="原创歌曲创作">原创歌曲创作</label>
+              <label><input type="checkbox" name="interest" value="录音与后期">录音与后期</label>
+            </td>
+          </tr>
+          <tr>
+            <th><label for="grade">年级</label></th>
+            <td>
+              <select class="sel" id="grade" name="grade" style="max-width:260px">
+                <option value="大一" selected>大一</option>
+                <option value="大二">大二</option>
+                <option value="大三">大三</option>
+                <option value="大四">大四</option>
+                <option value="研究生">研究生</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <th><label for="about">自我介绍</label></th>
+            <td>
+              <textarea class="tar" id="about" name="about" rows="5" placeholder="请简单介绍自己、以及加入吉他社的理由……"></textarea>
+            </td>
+          </tr>
+          <tr>
+            <th>是否服从活动安排</th>
+            <td class="radio-row">
+              <label><input type="radio" name="arrange" value="是" checked>是</label>
+              <label><input type="radio" name="arrange" value="否">否</label>
+            </td>
+          </tr>
+          <tr>
+            <th>提交操作</th>
+            <td>
+              <div class="form-actions">
+                <input class="mcbtn green" type="submit" value="提交报名">
+                <input class="mcbtn" type="reset" value="重置">
+              </div>
+              <p class="form-tip">提交后社团会在 3 个工作日内通过短信或邮件与你联系；本页面为课程作业演示，表单数据不会被真实提交。</p>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <div class="totop-row reveal">
+      <a class="totop" href="#top"><img src="img/icon-arrow.png" alt="">返回顶部</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 页脚 ============ -->
+<footer>
+  <div class="footer-grass" aria-hidden="true"></div>
+  <div class="footer-main">
+    <div class="wrap row">
+      <span class="fbrand">校园吉他社 · 2026 招新</span>
+      <span>琴房 201 的灯，一直为喜欢吉他的人亮着</span>
+      <span class="flinks">
+        <a href="#top">返回顶部</a>
+        <a href="club_intro.html">活动详情</a>
+        <a href="#signup">我要报名</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<button id="toTop" type="button" aria-label="回到页面顶部"><img src="img/icon-arrow.png" alt=""></button>
+<div class="xpbar" aria-hidden="true"><i id="xp"></i></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------- 1. 左上角唱片机：播放 / 暂停背景音乐 ---------- */
+  var audio = document.getElementById("bgm");
+  var btn = document.getElementById("bgmBtn");
+  var txt = document.getElementById("bgmText");
+  var hint = document.getElementById("musicHint");
+
+  function setPlaying(on) {
+    btn.classList.toggle("playing", on);
+    txt.textContent = on ? "正在播放" : "背景音乐";
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+  }
+  btn.addEventListener("click", function () {
+    hint.classList.remove("show");
+    if (audio.paused) {
+      var p = audio.play();
+      if (p && p.catch) {
+        p.catch(function () {
+          hint.textContent = "浏览器拦截了自动播放，请再点一次唱片机";
+          hint.classList.add("show");
+        });
+      }
+    } else {
+      audio.pause();
+    }
+  });
+  audio.addEventListener("play", function () { setPlaying(true); });
+  audio.addEventListener("pause", function () { setPlaying(false); });
+
+  window.addEventListener("load", function () {
+    var p = audio.play();
+    if (p && p.catch) {
+      p.catch(function () {
+        hint.classList.add("show");
+        setTimeout(function () { hint.classList.remove("show"); }, 6000);
+      });
+    }
+  });
+
+  /* ---------- 2. 导航高亮 + 滚动进度 + 返回顶部按钮 ---------- */
+  var navlinks = Array.prototype.slice.call(document.querySelectorAll(".hotbar a.slot"));
+  var sections = navlinks.map(function (a) { return document.querySelector(a.getAttribute("href")); });
+  var toTop = document.getElementById("toTop");
+  var xp = document.getElementById("xp");
+
+  function onScroll() {
+    var y = window.scrollY;
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    xp.style.width = Math.min(100, Math.max(0, (y / (docH || 1)) * 100)) + "%";
+    toTop.classList.toggle("show", y > 560);
+
+    var probe = y + 140, idx = -1;
+    sections.forEach(function (s, i) { if (s && s.offsetTop <= probe) { idx = i; } });
+    navlinks.forEach(function (a, i) { a.classList.toggle("active", i === idx); });
+  }
+  window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
+  toTop.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+
+  /* ---------- 3. 入场动画 ---------- */
+  var reveals = Array.prototype.slice.call(document.querySelectorAll(".reveal"));
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+    reveals.forEach(function (el) { io.observe(el); });
+  } else {
+    reveals.forEach(function (el) { el.classList.add("in"); });
+  }
+
+  /* ---------- 3.5 视频框：点一下隐藏播放提示 ---------- */
+  Array.prototype.forEach.call(document.querySelectorAll(".video-frame"), function (f) {
+    f.addEventListener("pointerdown", function () { f.classList.add("played"); }, { once: true });
+  });
+
+  /* ---------- 4. 成就弹窗 ---------- */
+  var achv = document.getElementById("achv");
+  setTimeout(function () { achv.classList.add("show"); }, 700);
+  setTimeout(function () { achv.classList.remove("show"); }, 6200);
+
+  /* ---------- 5. 报名表单校验（演示，不真实提交） ---------- */
+  var form = document.getElementById("signupForm");
+  var toast = document.getElementById("toast");
+  var timer = null;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add("show");
+    clearTimeout(timer);
+    timer = setTimeout(function () { toast.classList.remove("show"); }, 4200);
+  }
+  form.addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = form.elements["name"].value.trim();
+    if (!name) {
+      showToast("请先填写姓名再提交～");
+      form.elements["name"].focus();
+      return;
+    }
+    var phone = form.elements["phone"].value.trim();
+    if (phone && !/^1[3-9]\d{9}$/.test(phone)) {
+      showToast("手机号好像填错了，请检查一下～");
+      form.elements["phone"].focus();
+      return;
+    }
+    showToast("报名成功！欢迎 " + name + " 加入方块世界的吉他社～");
+    form.reset();
+  });
+
+  /* ---------- 6. 首次进入时提示音乐 ---------- */
+  setTimeout(function () {
+    if (audio.paused) { hint.classList.add("show"); }
+    setTimeout(function () { hint.classList.remove("show"); }, 5200);
+  }, 1500);
+})();
+</script>
+</body>
+</html>
