@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>影像与文学讨论夜 · Film &amp; Literature Talk | 光影文学社</title>
+<style>
+  /* ==========================================================
+     work3 · 社团招新页面
+     主题：影像与文学讨论夜 · Film & Literature Talk（学号末位 8）
+     ========================================================== */
+
+  /* ---- 作业指定样式：.page（除 background-color 外不可修改）---- */
+  .page {
+    display: inline-block;
+    background-color: #FFECD6;
+    box-shadow: 0 0 30px rgba(80, 58, 35, 0.25);
+    text-align: left;
+    max-width: 720px;
+  }
+
+  /* ---- 全局基础 ---- */
+  body {
+    margin: 0;
+    padding: 46px 18px 72px;
+    text-align: center;
+    color: #4A3520;
+    font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+    font-size: 16px;
+    line-height: 1.95;
+    background-color: #F4DFC2;
+    background-image:
+      radial-gradient(1100px 620px at 50% -8%, #FFF8EC 0%, rgba(255, 248, 236, 0) 68%),
+      radial-gradient(820px 520px at 100% 102%, #E9C9A0 0%, rgba(233, 201, 160, 0) 62%),
+      repeating-linear-gradient(0deg, rgba(140, 90, 40, .035) 0 2px, transparent 2px 6px);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  p { margin: 0; }
+
+  /* ---- 并集选择器（作业要求）：统一 h1~h6 ---- */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Songti SC", "STSong", "Source Han Serif SC", "Noto Serif SC", "SimSun", serif;
+    font-weight: 700;
+    color: #4A2E14;
+    letter-spacing: .06em;
+    line-height: 1.4;
+    margin: 0;
+  }
+
+  h1 { font-size: 38px; }
+  h2 { font-size: 23px; }
+  h3 { font-size: 19px; }
+  h4 { font-size: 16px; }
+  h5 { font-size: 15px; }
+
+  /* ---- 链接伪类（作业要求） ---- */
+  a:link {
+    color: #8C3D0C;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(200, 130, 58, .45);
+  }
+  a:visited {
+    color: #8A5A2B;
+  }
+  a:hover {
+    color: #B3261E;
+    border-bottom-color: #B3261E;
+  }
+  a:active {
+    color: #7A1F14;
+  }
+
+  /* ---- 后代选择器（作业要求）：只作用于 div 里 table 中的链接 ---- */
+  div table a {
+    font-weight: 700;
+    letter-spacing: .04em;
+    background-color: #FFE3BE;
+    padding: 3px 10px;
+    border-radius: 2px;
+    box-shadow: inset 0 0 0 1px rgba(200, 130, 58, .55);
+  }
+
+  /* ---- 类选择器（作业要求）：a.red / a.blue ---- */
+  a.red, a.blue {
+    display: inline-block;
+    padding: 13px 26px;
+    border-radius: 2px;
+    font-size: 15px;
+    letter-spacing: .1em;
+    line-height: 1.2;
+    border-bottom: 0;
+    transition: background-color .22s ease, color .22s ease, box-shadow .22s ease;
+  }
+  a.red {
+    color: #8E1B12;
+    background-color: #FBE1DA;
+    box-shadow: inset 0 0 0 2px #C0392B;
+  }
+  a.blue {
+    color: #0E4568;
+    background-color: #E1EEF7;
+    box-shadow: inset 0 0 0 2px #2E6E9E;
+  }
+  a.red:hover {
+    color: #FFF6F1;
+    background-color: #C0392B;
+  }
+  a.blue:hover {
+    color: #F2FAFF;
+    background-color: #2E6E9E;
+  }
+
+  /* ---- 伪元素（作业要求 ①）：p::first-letter 首字下沉 ---- */
+  p::first-letter {
+    float: left;
+    font-size: 3.05em;
+    line-height: .92;
+    font-weight: 700;
+    color: #B4530F;
+    margin: 5px 9px 0 0;
+  }
+
+  /* ---- 伪元素（作业要求 ②）：div::first-line 首行强调 ---- */
+  div::first-line {
+    color: #8C3D0C;
+    letter-spacing: .06em;
+    font-weight: 600;
+  }
+
+  /* 非正文段落取消首字下沉，避免标题区/表格说明被撑乱 */
+  .hero p::first-letter,
+  .signup p::first-letter,
+  .notice p::first-letter,
+  .links p::first-letter {
+    float: none;
+    font-size: 1em;
+    font-weight: inherit;
+    color: inherit;
+    margin: 0;
+    line-height: inherit;
+  }
+
+  /* ---- ID 选择器（作业要求）：p#intro 重要提示强调 ---- */
+  p#intro {
+    font-size: 18px;
+    font-weight: 700;
+    color: #A63A0E;
+    background-color: #FFE0B6;
+    border-left: 6px solid #C8823A;
+    padding: 16px 20px;
+    margin: 28px 0 0;
+    letter-spacing: .02em;
+    line-height: 1.85;
+    box-shadow: 0 2px 0 rgba(200, 130, 58, .35);
+  }
+  p#intro::first-letter {
+    float: none;
+    font-size: 1.12em;
+    color: #7A2306;
+    margin: 0;
+    line-height: inherit;
+  }
+
+  /* ========== ① 顶部标题区 ========== */
+  .hero {
+    position: relative;
+    padding: 56px 44px 46px;
+    text-align: center;
+    color: #FFEFD9;
+    background-color: #6E4520;
+    background-image: linear-gradient(165deg, #5C3A18 0%, #6E4520 38%, #8A5A28 74%, #A9743A 100%);
+  }
+  .hero::before,
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 15px;
+    pointer-events: none;
+    background-image: repeating-linear-gradient(90deg, rgba(255, 236, 206, .5) 0 8px, rgba(255, 236, 206, 0) 8px 23px);
+  }
+  .hero::before { top: 0; }
+  .hero::after { bottom: 0; }
+
+  .hero h1 {
+    font-size: 40px;
+    letter-spacing: .18em;
+    text-indent: .18em;
+    color: #FFF6E6;
+    text-shadow: 0 3px 0 rgba(46, 25, 8, .35);
+  }
+  .hero .sub {
+    margin: 14px 0 0;
+    font-family: "Georgia", "Times New Roman", serif;
+    font-size: 12.5px;
+    letter-spacing: .38em;
+    text-indent: .38em;
+    text-transform: uppercase;
+    color: #F0C68C;
+  }
+  .hero .tagline {
+    max-width: 502px;
+    margin: 24px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 226, 184, .3);
+    font-size: 14.5px;
+    line-height: 2.1;
+    letter-spacing: .04em;
+    color: #FFE6C0;
+  }
+
+  /* ========== ② 活动介绍区 ========== */
+  .intro {
+    padding: 40px clamp(20px, 5vw, 44px) 30px;
+    border-bottom: 1px dashed #DFC3A0;
+  }
+  .intro h2 {
+    position: relative;
+    padding-bottom: 14px;
+    margin-bottom: 24px;
+    border-bottom: 1px dashed #DFC3A0;
+  }
+  .intro h2::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 68px;
+    height: 3px;
+    background-color: #C8823A;
+  }
+  .intro p {
+    margin: 0 0 18px;
+    color: #4A3520;
+    font-size: 15.5px;
+    line-height: 2.05;
+    text-align: justify;
+  }
+  .intro p:last-child { margin-bottom: 0; }
+
+  /* 引言块：div 首行由 div::first-line 强化，效果最直观 */
+  .quote {
+    margin: 26px 0 4px;
+    padding: 18px 22px;
+    background-color: #FFF3E1;
+    border-left: 4px solid #E0A96B;
+    font-family: "Songti SC", "STSong", "SimSun", serif;
+    font-size: 17px;
+    line-height: 1.95;
+    color: #7A5634;
+  }
+
+  /* ========== ③ 报名信息表格区 ========== */
+  .signup {
+    padding: 34px clamp(20px, 5vw, 44px) 40px;
+    border-bottom: 1px dashed #DFC3A0;
+  }
+  .signup h3 {
+    margin-bottom: 14px;
+  }
+  .signup .tip {
+    margin: 0 0 22px;
+    font-size: 14px;
+    color: #6B5236;
+    line-height: 1.9;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    line-height: 1.75;
+    background-color: #FFFBF3;
+    border: 1px solid #DFC3A0;
+    box-shadow: 0 3px 0 rgba(200, 130, 58, .22);
+  }
+  th, td {
+    border: 1px solid #E3CAAA;
+    padding: 12px 10px;
+    text-align: left;
+    vertical-align: middle;
+  }
+  th {
+    background-image: linear-gradient(180deg, #7B4E22, #5A3818);
+    color: #FFEBC8;
+    font-family: "Songti SC", "STSong", "SimSun", serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    border-color: #5A3818;
+    white-space: nowrap;
+  }
+  tbody tr:nth-child(even) td { background-color: #FFF3E0; }
+  tbody tr:hover td { background-color: #FFE7C7; }
+  th:nth-child(1), td:nth-child(1) { width: 52px; text-align: center; color: #9A6A32; }
+  th:nth-child(2) { width: 84px; }
+  th:nth-child(3) { width: 170px; }
+  th:nth-child(5), td:nth-child(5) { width: 104px; text-align: center; white-space: nowrap; }
+  td:nth-child(2) { font-weight: 700; color: #5C3A18; }
+  td:nth-child(3) { color: #8C3D0C; }
+
+  /* ========== ④ 页面链接区 ========== */
+  .links {
+    padding: 32px clamp(20px, 5vw, 44px) 38px;
+    border-bottom: 1px dashed #DFC3A0;
+    background-color: rgba(255, 246, 231, .55);
+  }
+  .links h4 {
+    margin-bottom: 18px;
+    color: #6B4A24;
+  }
+  .link-row {
+    padding: 0;
+  }
+  .link-row a.red { margin-right: 16px; }
+
+  /* ========== ⑤ 底部公告区 ========== */
+  .notice {
+    padding: 34px clamp(20px, 5vw, 44px) 40px;
+    background-image: linear-gradient(180deg, #FFF6E7, #FFE9CB);
+    border-top: 4px double #D9A96A;
+  }
+  .notice h5 {
+    margin-bottom: 16px;
+    color: #7A4A1C;
+  }
+  .notice p {
+    margin: 0 0 14px;
+    font-size: 14px;
+    line-height: 1.95;
+    color: #5C422A;
+    text-align: justify;
+  }
+  .notice p:last-child { margin-bottom: 0; }
+  .notice p:nth-child(even) { color: #6E4E2C; }
+
+  /* ---- 响应式 ---- */
+  @media (max-width: 660px) {
+    body { padding: 16px 8px 44px; }
+    .hero { padding: 44px 22px 34px; }
+    .hero h1 { font-size: 26px; letter-spacing: .1em; text-indent: .1em; }
+    .hero .sub { font-size: 11px; letter-spacing: .22em; text-indent: .22em; }
+    .hero .tagline { font-size: 13.5px; }
+    .intro, .signup, .links, .notice { padding-left: 20px; padding-right: 20px; }
+    h2 { font-size: 20px; }
+    table { font-size: 12.5px; }
+    th, td { padding: 9px 6px; }
+    div table a { padding: 2px 6px; }
+    .link-row a.red { margin-right: 0; margin-bottom: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ===================== ① 顶部标题区 ===================== -->
+  <div class="hero">
+    <h1>影像与文学讨论夜</h1>
+    <p class="sub">Film &amp; Literature Talk</p>
+    <p class="tagline">光影文学社 2026 冬季招新 · 我们用一部电影和一本书，换一个愿意把观后感说出口的人。</p>
+  </div>
+
+  <!-- ===================== ② 活动介绍区 ===================== -->
+  <div class="intro">
+    <h2 id="intro">这一夜，我们在别人的故事里认出自己</h2>
+
+    <p>每个月的第二个周五，光影文学社会把活动室改成一间小小的放映厅。我们把一部电影和一本书并排放在长桌上，让镜头里的留白与纸页上的句子互相注解。这里没有主讲人，也没有必须记录的重点，只有六把椅子和六个愿意开口的人。</p>
+
+    <p>本期的关键词是「在别人的故事里认出自己」。我们会从《千与千寻》里那条通往汤屋的长廊聊起，看宫崎骏如何用一条隧道完成童年与成年的交接，也看无脸男怎样把「被需要」误认成「被爱」。随后我们会把《The Little Prince》摊开在灯下，讨论驯养究竟是一种束缚，还是一种自愿的彼此建立。影像与文学从来不是两种语言，它们只是把同一束光折向了不同的角度。</p>
+
+    <p>如果你愿意，也欢迎带一本正在读的书、一段反复重看的片段来。我们相信最好的讨论不是得出结论，而是让一个问题在六个人之间多停留一会儿——它停留得越久，我们越接近自己。</p>
+
+    <div class="quote">我们不是来寻找标准答案的：一部电影、一本小说，只是把同一束光折向不同的角度，而讨论，让这束光在六个人之间多停留了一会儿。</div>
+
+    <p id="intro">重要提示：讨论夜于 12 月 12 日 19:00 在图书馆三层放映室举行，请提前十分钟入场并将手机调至静音；现场共 12 个席位，报名后若无法到场，请务必提前一天在线告知，把位置留给仍在等待的同学。</p>
+  </div>
+
+  <!-- ===================== ③ 报名信息表格区 ===================== -->
+  <div class="signup">
+    <h3>本期报名名单 · 六个席位与他们的讨论主题</h3>
+    <p class="tip">下表为本期已确认的参与者、共读作品与讨论主题。剩余席位可点击末列链接在线占座，先到先得。</p>
+
+    <table>
+      <tr>
+        <th>序号</th>
+        <th>参与者</th>
+        <th>共读作品</th>
+        <th>讨论主题</th>
+        <th>报名通道</th>
+      </tr>
+      <tr>
+        <td>01</td>
+        <td>林知遥</td>
+        <td>《千与千寻》</td>
+        <td>名字，是找回自己的第一把钥匙</td>
+        <td><a href="https://hongchenwusdnu.github.io/bookstore/job4.html">往期场次</a></td>
+      </tr>
+      <tr>
+        <td>02</td>
+        <td>陈叙白</td>
+        <td>《The Little Prince》</td>
+        <td>驯养、责任与一场体面的告别</td>
+        <td><a href="https://hongchenwusdnu.github.io/bookstore/job4.html">往期场次</a></td>
+      </tr>
+      <tr>
+        <td>03</td>
+        <td>周斯年</td>
+        <td>《海上钢琴师》</td>
+        <td>不下船的人，是胆怯还是自由</td>
+        <td><a href="https://hongchenwusdnu.github.io/bookstore/job4.html">往期场次</a></td>
+      </tr>
+      <tr>
+        <td>04</td>
+        <td>苏未晚</td>
+        <td>《百年孤独》</td>
+        <td>时间如何在一条血脉里反复折返</td>
+        <td><a href="https://hongchenwusdnu.github.io/bookstore/job4.html">往期场次</a></td>
+      </tr>
+      <tr>
+        <td>05</td>
+        <td>何砚秋</td>
+        <td>《花样年华》</td>
+        <td>克制为什么比表白更有力量</td>
+        <td><a href="https://hongchenwusdnu.github.io/bookstore/job4.html">往期场次</a></td>
+      </tr>
+      <tr>
+        <td>06</td>
+        <td>沈朗</td>
+        <td>《活着》</td>
+        <td>苦难叙事里那点不肯熄灭的韧性</td>
+        <td><a href="https://hongchenwusdnu.github.io/bookstore/job4.html">往期场次</a></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- ===================== ④ 页面链接区 ===================== -->
+  <div class="links">
+    <h4>快速通道</h4>
+    <div class="link-row">
+      <a class="red" href="https://hongchenwusdnu.github.io/bookstore/job4.html">查看往期活动照片</a>
+      <a class="blue" href="https://ye-tife.github.io/guitar-club/zhu-0338-work2.html">在线咨询活动详情</a>
+    </div>
+  </div>
+
+  <!-- ===================== ⑤ 底部公告区 ===================== -->
+  <div class="notice">
+    <h5>活动公告</h5>
+
+    <p>公告一：本期讨论夜免费入场，现场提供纸笔与《The Little Prince》中英对照选段。<br>请自带水杯，放映室内不提供一次性纸杯。</p>
+
+    <p>公告二：11 月 30 日前报名可优先选择靠窗座位。<br>如需携带朋友同行，请在报名时备注人数，我们将按到场顺序安排加座。</p>
+
+    <p>公告三：活动照片与讨论纪要将在活动结束后一周内整理发布。<br>若不愿出现在回顾推文中，请提前告知社长，我们会为你保留一整个画面之外的位置。</p>
+  </div>
+
+</div>
+
+</body>
+</html>
